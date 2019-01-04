@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const userController = require('./Controller/UserController');
-const bookController = require('./Controller/BookController');
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const blockchainController = require('./Controller/BlockchainController');
+const cityController = require('./Controller/CityController');
 
 //connect mLab Database
 // mongoose.connect('mongodb://tqhuy:Husky12345@ds153709.mlab.com:53709/database-test',{
@@ -14,7 +12,7 @@ const blockchainController = require('./Controller/BlockchainController');
 // })
 
 //connect robo3T database 
-mongoose.connect('mongodb://localhost:27017/GenBook',{
+mongoose.connect('mongodb://localhost:27017/GenLook',{
     useNewUrlParser :true
 })
 
@@ -36,25 +34,8 @@ app.use((req, res, next) => {
     next();
   });
 
-  
-// initialize handle error
-// app.use((req , res , next) => {
-//     const error = new Error('Not Found')
-//     error.status = 404
-//     next(error)
-// })
-
-// app.use((error , req , res , next) =>{
-//     res.status(error.status || 500);
-//     res.json({
-//         error:{
-//             message : error.message
-//         }
-//     })
-// })
-
 // test api active
-app.get('/api/v1/data/genbook' , (req , res , next) =>{
+app.get('/api/v1/data/genlook' , (req , res , next) =>{
     res.status(200).json({
         message:'api is working',
         status:'success'
@@ -62,8 +43,6 @@ app.get('/api/v1/data/genbook' , (req , res , next) =>{
 });
 
 // set api router
-app.use('/api/v1/users' , userController);
-app.use('/api/v1/books' , bookController);
-app.use('/api/v1/blockchain' , blockchainController);
+app.use('/api/v1/genlook/city' , cityController);
 
 module.exports = app;
