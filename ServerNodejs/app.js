@@ -5,19 +5,22 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cityController = require('./Controller/CityController');
-
+const genServicesController = require('./Controller/GenServicesController');
+const cors = require('cors');
+const constant = require('./Shared/Constant');
 //connect mLab Database
 // mongoose.connect('mongodb://tqhuy:Husky12345@ds153709.mlab.com:53709/database-test',{
 //     useNewUrlParser :true
 // })
 
 //connect robo3T database 
-mongoose.connect('mongodb://localhost:27017/GenLook',{
+mongoose.connect(constant.BASE_URL_DATABASE + constant.DATABASE_NAME,{
     useNewUrlParser :true
 })
 
 // initialize morgan and bodyParser
 app.use(morgan('dev'))
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
@@ -44,5 +47,18 @@ app.get('/api/v1/data/genlook' , (req , res , next) =>{
 
 // set api router
 app.use('/api/v1/genlook/city' , cityController);
+app.use('/api/v1/genlook/genServices' , genServicesController);
+
+// initialize handle error
+app.use((req , res , next) => {
+    next(constant.ERROR_MESSAGE_404)
+})
+
+app.use((error , req , res , next) =>{
+    res.status(error.status || 404);
+    res.json({
+        message : error.message
+    })
+})
 
 module.exports = app;

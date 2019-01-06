@@ -8,7 +8,7 @@ const citySchema = mongoose.Schema({
     max:Number,
     description:String,
     rate:Number,
-    image:String
+    image:String,
 });
 
 module.exports = mongoose.model('CityTable' , citySchema , 'CityTable');
