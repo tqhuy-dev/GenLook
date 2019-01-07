@@ -58,7 +58,7 @@ class CityDatabase {
 
             city.find({name: name}, projection, (error, result) => {
                 if (error) {
-                    reject(constant.getMessageAPI(400, error, []));
+                    reject(common.getMessageAPI(400, error, []));
                 } else {
                     if (result.length > 0) {
                         var promise = this.getActivitiesbyCity(result[0]._id);
