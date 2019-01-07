@@ -1,13 +1,16 @@
 const Promise = require('bluebird');
 const city = require('../Model/CityModel');
 const constant = require('../Shared/Constant');
+const activities = require('../Model/ActivitiesModel');
+const mongoose = require('mongoose');
+
 class CityDatabase {
 
-    getMessageAPI(code,message,result){
+    getMessageAPI(code, message, result) {
         var messageBody = {
-            statusCode:code,
-            message:message,
-            data:result
+            statusCode: code,
+            message: message,
+            data: result
         }
         return messageBody;
     }
@@ -31,9 +34,9 @@ class CityDatabase {
         return new Promise((resolve, reject) => {
             city.find({}, projection, sortCustomize, (error, result) => {
                 if (error) {
-                    reject(this.getMessageAPI(400,error,[]));
+                    reject(this.getMessageAPI(400, error, []));
                 } else {
-                    resolve(this.getMessageAPI(200,"Query Success",result));
+                    resolve(this.getMessageAPI(200, "Query Success", result));
                 }
             })
         });
@@ -55,15 +58,24 @@ class CityDatabase {
         return new Promise((resolve, reject) => {
 
             var projection = {
-                _id:false,
+                // _id: false,
             }
 
-            city.find({name: name} , projection, (error, result) => {
+
+            city.find({name: name}, projection, (error, result) => {
                 if (error) {
-                    reject(this.getMessageAPI(400,error,[]));
+                    reject(this.getMessageAPI(400, error, []));
                 } else {
                     if (result.length > 0) {
-                        resolve(this.getMessageAPI(200,"Query Success",result));
+                        var promise = this.getActivitiesbyCity(result[0]._id);
+                        promise.then((data) => {
+                            resolve(this.getMessageAPI(200, "Query Success", {
+                                information: result[0],
+                                activities: data
+                            }));
+                        }).catch((error) => {
+                            activities = error;
+                        })
                     } else {
                         reject(constant.ERROR_MESSAGE_DATA_NOT_FOUND);
                     }
@@ -71,6 +83,20 @@ class CityDatabase {
                 }
             });
         })
+    }
+
+    getActivitiesbyCity(idCity) {
+        return new Promise((resolve, reject) => {
+            activities.find({
+               city: mongoose.Types.ObjectId(idCity)
+            }, function (error, result) {
+                if (error) {
+                    reject(constant.ERROR_MESSAGE_DATA_NOT_FOUND)
+                } else {
+                    resolve(result);
+                }
+            })
+        });
     }
 }
 

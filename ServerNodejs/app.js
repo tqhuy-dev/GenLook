@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cityController = require('./Controller/CityController');
 const genServicesController = require('./Controller/GenServicesController');
+const activitiesController = require('./Controller/ActivitiesController');
 const cors = require('cors');
 const constant = require('./Shared/Constant');
 //connect mLab Database
@@ -18,7 +19,7 @@ mongoose.connect(constant.BASE_URL_DATABASE + constant.DATABASE_NAME,{
     useNewUrlParser :true
 })
 
-// initialize morgan and bodyParser
+// initialize morgan,cors and bodyParser
 app.use(morgan('dev'))
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -48,6 +49,7 @@ app.get('/api/v1/data/genlook' , (req , res , next) =>{
 // set api router
 app.use('/api/v1/genlook/city' , cityController);
 app.use('/api/v1/genlook/genServices' , genServicesController);
+app.use('/api/v1/genlook/activities' , activitiesController);
 
 // initialize handle error
 app.use((req , res , next) => {
