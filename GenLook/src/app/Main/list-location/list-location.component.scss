@@ -1,0 +1,23 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 17px;
+
+    .header{
+        font-size: 25px;
+        font-weight: bold;
+        color: #FF6F00;
+        margin-bottom: 10px;
+    }
+
+    .body-location{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+        app-location{
+            margin: 10px;
+        }
+    }
+}
