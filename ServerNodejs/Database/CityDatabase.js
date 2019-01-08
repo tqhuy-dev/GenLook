@@ -12,7 +12,7 @@ class CityDatabase {
             name: true,
             image: true,
             tourists: true,
-            _id: false
+            _id: true
         }
 
         var sortCustomize = {

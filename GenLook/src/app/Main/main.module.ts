@@ -5,6 +5,8 @@ import { MainComponent } from './main/main.component';
 import { CarouselComponent } from '../Main/carousel/carousel.component';
 import { LocationComponent } from '../Main/location/location.component';
 import { ListLocationComponent } from '../Main/list-location/list-location.component';
+import { MainService } from './services/main.service';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -12,8 +14,10 @@ import { ListLocationComponent } from '../Main/list-location/list-location.compo
         CarouselComponent,
         LocationComponent,
         ListLocationComponent],
-    imports: [ CommonModule  ],
+    imports: [
+        CommonModule,
+        HttpClientModule],
     exports: [MainComponent],
-    providers: [],
+    providers: [MainService],
 })
 export class MainModule {}
