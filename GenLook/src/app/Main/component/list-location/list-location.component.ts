@@ -13,26 +13,17 @@ export class ListLocationComponent implements OnInit {
   constructor(private mainService: MainService) {}
 
   ngOnInit() {
-    this.getCities();
+    this.getCities2();
   }
 
-  getCities() {
-    const promise = this.mainService.getLocation();
-    promise.then((data: City[]) => {
-      if (data) {
-        data.forEach(element => {
-          const city: City = {
-            _id: element._id,
-            name: element.name,
-            tourists: element.tourists,
-            image: element.image
-          };
-          this.cities.push(city);
-        });
-        console.log(this.cities);
-      } else {
-        console.log('fail');
-      }
+  getCities2() {
+    this.mainService.listCity.subscribe((data) => {
+      this.cities = data;
+    } , (error) => {
+      console.log('error');
+    } , () => {
+      console.log('completed');
     });
+    this.mainService.getLocation();
   }
 }
