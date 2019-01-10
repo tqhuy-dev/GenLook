@@ -1,13 +1,16 @@
 <div class="flex-container">
-  <div class="header">GEN SERVICES</div>
-  <div class="body">
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
-      <app-services-item></app-services-item>
+  <div *ngIf="mode === 0">
+    <div class="header">GEN SERVICES</div>
+    <div class="body">
+      <app-services-item *ngFor="let item of listServices" [servicesItem]="item"></app-services-item>
+    </div>
   </div>
+
+  <div *ngIf="mode === 1">
+    <div class="header">YEAR 'S EVEN CELEBRATION</div>
+    <div class="body">
+      <app-year-event-item *ngFor="let item of listYearEvent" [event]="item"></app-year-event-item>
+    </div>
+  </div>
+
 </div>

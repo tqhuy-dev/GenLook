@@ -6,16 +6,16 @@ const constant = require('../Shared/Constant');
 
 var genServicesTable = new GenServicesDatabase();
 
-router.get('/',(req , res , next) =>{
-    var promise = genServicesTable.getAllServices();
-    promise.then((data) => {
-        res.status(200).json(data);
-    }).catch((error) =>{
-        res.status(401).json({
-            messaage:error
-        })
-    })
-});
+// router.get('/',(req , res , next) =>{
+//     var promise = genServicesTable.getAllServices();
+//     promise.then((data) => {
+//         res.status(200).json(data);
+//     }).catch((error) =>{
+//         res.status(401).json({
+//             messaage:error
+//         })
+//     })
+// });
 
 router.get('/:name/:api_accept_key',(req , res , next) =>{
     if(req.params.api_accept_key === constant.API_ACCESS_KEY_DEV){
@@ -28,4 +28,23 @@ router.get('/:name/:api_accept_key',(req , res , next) =>{
     }
 });
 
+router.get('/:api_accept_key' , (req , res , next) =>{
+    if(req.params.api_accept_key === constant.API_ACCESS_KEY_DEV){
+       var promise = genServicesTable.getServicesByName("All" , req.body.city);
+       promise.then((data) =>{
+           res.status(data.statusCode).json(data);
+       }).catch((error) =>{
+           res.status(error.statusCode).json(error);
+       })
+    }
+});
+
+router.get('/', (req , res , next) =>{
+    var promise = genServicesTable.getServices();
+    promise.then((data) =>{
+        res.status(data.statusCode).json(data);
+    }).catch((error) =>{
+        res.status(error.statusCode).json(error);
+    })
+});
 module.exports = router;

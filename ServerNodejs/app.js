@@ -7,6 +7,8 @@ const bodyParser = require('body-parser')
 const cityController = require('./Controller/CityController');
 const genServicesController = require('./Controller/GenServicesController');
 const activitiesController = require('./Controller/ActivitiesController');
+const yearEvenController = require('./Controller/YearEvenController');
+const officeAddressController = require('./Controller/OfficeAddressController');
 const cors = require('cors');
 const constant = require('./Shared/Constant');
 //connect mLab Database
@@ -50,7 +52,8 @@ app.get('/api/v1/data/genlook' , (req , res , next) =>{
 app.use('/api/v1/genlook/city' , cityController);
 app.use('/api/v1/genlook/genServices' , genServicesController);
 app.use('/api/v1/genlook/activities' , activitiesController);
-
+app.use('/api/v1/genlook/yearEven' , yearEvenController);
+app.use('/api/v1/genlook/office' , officeAddressController);
 // initialize handle error
 app.use((req , res , next) => {
     next(constant.ERROR_MESSAGE_404)

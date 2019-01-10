@@ -6,7 +6,8 @@ const genServicesSchema = mongoose.Schema({
     rate:Number,
     status:String,
     city:String,
-    price:Number
+    price:Number,
+    image:String
 });
 
 module.exports = mongoose.model('GenLookServicesTable' , genServicesSchema , 'GenLookServicesTable');

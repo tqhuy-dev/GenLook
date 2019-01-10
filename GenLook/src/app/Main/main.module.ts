@@ -9,6 +9,7 @@ import { MainService } from './services/main.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServicesItemComponent } from '../Main/component/services-item/services-item.component';
 import { ServicesListComponent } from '../Main/component/services-list/services-list.component';
+import { YearEventItemComponent } from '../Main/component/year-event-item/year-event-item.component';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -17,7 +18,8 @@ import { ServicesListComponent } from '../Main/component/services-list/services-
         LocationComponent,
         ListLocationComponent,
         ServicesItemComponent,
-        ServicesListComponent],
+        ServicesListComponent,
+        YearEventItemComponent],
     imports: [
         CommonModule,
         HttpClientModule],
