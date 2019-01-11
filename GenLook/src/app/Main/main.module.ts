@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServicesItemComponent } from '../Main/component/services-item/services-item.component';
 import { ServicesListComponent } from '../Main/component/services-list/services-list.component';
 import { YearEventItemComponent } from '../Main/component/year-event-item/year-event-item.component';
+import { AddressComponent } from '../Main/component/address/address.component';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -19,7 +20,8 @@ import { YearEventItemComponent } from '../Main/component/year-event-item/year-e
         ListLocationComponent,
         ServicesItemComponent,
         ServicesListComponent,
-        YearEventItemComponent],
+        YearEventItemComponent,
+        AddressComponent],
     imports: [
         CommonModule,
         HttpClientModule],

@@ -1,0 +1,17 @@
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #FF6F00;
+    justify-content: space-between;
+
+    .address-office{
+        margin: 20px;
+
+        div {
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            margin: 10px;
+        }
+    }
+}
