@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { GenServices } from 'src/app/interface/genServices.interface';
 import { ResponseReturn } from 'src/app/interface/response.interface';
 import { YearEvent } from 'src/app/interface/yearEven.interface';
+import { OfficeAddress } from 'src/app/interface/address.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,11 @@ export class MainService {
   private _cities: BehaviorSubject<City[]> = new BehaviorSubject([]);
   private _services: BehaviorSubject<GenServices[]> = new BehaviorSubject([]);
   private _yearEvent: BehaviorSubject<YearEvent[]> = new BehaviorSubject([]);
+  private _address: BehaviorSubject<OfficeAddress[]> = new BehaviorSubject([]);
+
+  get address() {
+    return this._address.asObservable();
+  }
 
   get yearEvent() {
     return this._yearEvent.asObservable();
@@ -53,6 +59,13 @@ export class MainService {
     return this.httpClient.get('http://localhost:3000/api/v1/genlook/yearEven')
     .subscribe((response: any) => {
       this._yearEvent.next(response.data);
+    });
+  }
+
+  getAddress() {
+    return this.httpClient.get('http://localhost:3000/api/v1/genlook/office')
+    .subscribe((response: any) => {
+      this._address.next(response.data);
     });
   }
 }

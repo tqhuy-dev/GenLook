@@ -11,6 +11,7 @@ import { ServicesItemComponent } from '../Main/component/services-item/services-
 import { ServicesListComponent } from '../Main/component/services-list/services-list.component';
 import { YearEventItemComponent } from '../Main/component/year-event-item/year-event-item.component';
 import { AddressComponent } from '../Main/component/address/address.component';
+import { ListAddressComponent } from '../Main/component/list-address/list-address.component';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -21,7 +22,8 @@ import { AddressComponent } from '../Main/component/address/address.component';
         ServicesItemComponent,
         ServicesListComponent,
         YearEventItemComponent,
-        AddressComponent],
+        AddressComponent,
+        ListAddressComponent],
     imports: [
         CommonModule,
         HttpClientModule],

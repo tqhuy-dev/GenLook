@@ -1,0 +1,11 @@
+<div class="flex-container">
+  <div class="header">{{ Title }}</div>
+  <div class="flex-container-list">
+      <div class="address-office">
+        <app-address *ngFor="let item of officeAddress" [address]="item"></app-address>
+      </div>
+      <div class="location-image">
+        <img  src="../../../../assets/image/location.PNG" alt="">
+      </div>
+    </div>
+</div>
