@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConstantValue } from '../common/constant.common';
-import { ApiLink } from '../common/api-constant.common';
+import { ConstantValue } from '../../common/constant.common';
+import { ApiLink } from '../../common/api-constant.common';
 import { City } from 'src/app/interface/city.interface';
 import { BehaviorSubject } from 'rxjs';
 import { GenServices } from 'src/app/interface/genServices.interface';

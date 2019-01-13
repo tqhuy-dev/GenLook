@@ -1,0 +1,27 @@
+$margin-side: 250px;
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px black;
+    box-shadow: rgba(0,0,0,0.147) 3px 3px 3px 3px;
+    justify-content: center;
+    margin-top: 60px;
+    margin-right: $margin-side;
+    margin-left: $margin-side;
+    padding-top: 30px;
+    
+    .create-account{
+        cursor: pointer;
+    }
+
+    div{
+        text-align: center;
+    }
+
+    .header{
+        color:#FF6F00;
+        font-weight: bold;
+        font-size: 40px;
+    }
+}
