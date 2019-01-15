@@ -1,10 +1,9 @@
 <div class="flex-container">
   <div class="header">GenLook</div>
-  <div><input [(ngModel)]="name" type="text"></div>
-  <div><input [(ngModel)]="password" type="password"></div>
-  <div><input [(ngModel)]="confirmPassword" type="password"></div>
-  <div class="btn-signin"><button>Create Account</button></div>
-  <div class="create-account">Back to sign in</div>
+  <div><input [(ngModel)]="name" type="text" placeholder="your account"></div>
+  <div><input [(ngModel)]="password" type="password" placeholder="password"></div>
+  <div><input [(ngModel)]="confirmPassword" type="password" placeholder="confirm password"></div>
+  <div class="btn-signin" (click)="checkValidate()"><button>Create Account</button></div>
+  <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active" >Back to sign in</div>
 
-  <p>{{name}} {{password}}</p>
 </div>
