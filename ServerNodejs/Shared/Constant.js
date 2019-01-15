@@ -16,8 +16,8 @@ const ERROR_MESSAGE_REQUEST_NOT_FOUNT = {
 }
 
 const ERROR_MESSAGE_LOGIN_FAIL = {
-    statusCode: 404,
-    message: "Login fail"
+    statusCode: 200,
+    message: "Login Fail"
 }
 const STATUS_CODE_QUERY_FAIL = 400;
 const STATUS_CODE_QUERY_SUCCESS = 200;
