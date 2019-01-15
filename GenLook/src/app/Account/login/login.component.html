@@ -1,8 +1,8 @@
 <div class="flex-container">
   <div class="header">GenLook</div>
-  <div><input [(ngModel)]="name" type="text"></div>
+  <div><input [(ngModel)]="name" type="text" ></div>
   <div><input [(ngModel)]="password" type="password"></div>
-  <div class="btn-signin"><button>Sign In</button></div>
+  <div class="btn-signin"><button (click)="checkValidAccount()">Sign In</button></div>
   <div class="create-account">Create An Account</div>
 
   <p>{{name}}  {{password}}</p>
