@@ -3,6 +3,7 @@ import { ValidateCommon } from '../../common/validate.common';
 import { PatternCommon } from '../../common/pattern.common';
 import { AccountService } from '../account.service';
 import { ConstantValue } from 'src/app/common/constant.common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   account = '';
   password = '';
   statusMessage = '';
-  constructor(private accountServices: AccountService) {
+  constructor(private accountServices: AccountService , private router: Router) {
   }
 
   ngOnInit() {
@@ -34,6 +35,8 @@ export class LoginComponent implements OnInit {
     if (this.checkValidAccount()) {
       this.accountServices.login(this.account, this.password).then((data) => {
         this.statusMessage = 'success';
+        this.router.navigate(['/home']);
+
       }).catch((error) => {
         this.statusMessage = 'fail';
       });

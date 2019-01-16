@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,15 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'GenLook';
 
-  constructor(private route: Router) {}
+  constructor(private route: Router , @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
   ngOnInit() {
-    this.route.navigate(['/login']);
+    console.log(this.storage.get('uuid'));
+    if (this.storage.get('uuid') !== null) {
+      console.log('uuid exist');
+      this.route.navigate(['/home']);
+    } else {
+      console.log('uuid');
+      this.route.navigate(['/login']);
+    }
   }
 }

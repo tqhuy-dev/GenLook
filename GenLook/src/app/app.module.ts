@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StorageServiceModule} from 'angular-webstorage-service';
 
 import { AppComponent } from './app.component';
 import { MainModule } from './Main/main.module';
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StorageServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

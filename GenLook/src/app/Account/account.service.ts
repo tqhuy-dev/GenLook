@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConstantValue } from '../common/constant.common';
 import { ApiLink } from '../common/api-constant.common';
 import { ResponseReturn } from '../interface/response.interface';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AccountService {
     })
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient , @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
 
   login(account, password) {
 
@@ -23,11 +24,14 @@ export class AccountService {
       account: account,
       password: password
     };
+    const encode = btoa(`${account}:${password}`);
+    this.httpOptions.headers.set('Authorization' , `Basic ${encode}`);
     return new Promise((resolve, reject) => {
       this.httpClient.post(ConstantValue.BASE_URL_API + ApiLink.API_LOGIN, userInfor, this.httpOptions)
         .subscribe((response: ResponseReturn) => {
           if (response.message !== ConstantValue.LOGIN_FAIL_MESSAGE) {
             resolve(true);
+            this.storage.set('uuid', response.message);
           } else {
             reject(false);
           }

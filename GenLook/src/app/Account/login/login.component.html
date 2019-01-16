@@ -3,6 +3,6 @@
   <div><input [(ngModel)]="account" type="text" placeholder="your account"></div>
   <div><input [(ngModel)]="password" type="password" placeholder="password"></div>
   <div class="btn-signin"><button (click)="loginServer()">Sign In</button></div>
-  <div class="create-account" [routerLink]="['/signin']" routerLinkActive="router-link-active" >Create An Account</div>
+  <div class="create-account" [routerLink]="['/home']" routerLinkActive="router-link-active" >Create An Account</div>
   <div>{{statusMessage}}</div>
 </div>
