@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   validateCommon = new ValidateCommon();
   account = '';
   password = '';
+  statusMessage = '';
   constructor(private accountServices: AccountService) {
   }
 
@@ -23,15 +24,21 @@ export class LoginComponent implements OnInit {
     const isValidAccount = this.validateCommon.checkValidate(this.account, PatternCommon.AccountPattern);
     const isValidPassword = this.validateCommon.checkValidate(this.password, PatternCommon.PasswordPattern);
     if (isValidAccount === ValidateCommon.VALID_TRUE && isValidPassword === ValidateCommon.VALID_TRUE) {
-      this.accountServices.login(this.account , this.password , function(response) {
-        if (response !== ConstantValue.LOGIN_FAIL_MESSAGE) {
-          console.log(response);
-        } else {
-          console.log('fail');
-        }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  loginServer() {
+    if (this.checkValidAccount()) {
+      this.accountServices.login(this.account, this.password).then((data) => {
+        this.statusMessage = 'success';
+      }).catch((error) => {
+        this.statusMessage = 'fail';
       });
     } else {
-      console.log('fail');
+      this.statusMessage = 'valid error';
     }
   }
 
