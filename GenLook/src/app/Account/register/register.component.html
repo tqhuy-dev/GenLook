@@ -9,3 +9,4 @@
   <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active" >Back to sign in</div>
   <div>{{statusMessage}}</div>
 </div>
+<ngb-datepicker (select)="selectBirthday($event)"></ngb-datepicker>

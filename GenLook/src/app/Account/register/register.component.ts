@@ -52,4 +52,8 @@ export class RegisterComponent implements OnInit {
       this.statusMessage = 'invalid error';
     }
   }
+
+  selectBirthday(event: any) {
+    console.log(event);
+  }
 }
