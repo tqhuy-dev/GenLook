@@ -15,4 +15,10 @@ export class PatternCommon {
         pattern: ConstantValue.PATTERN_PASSWORD,
         uppercase: true
     };
+    static readonly NamePattern: PatternValid = {
+        max: ConstantValue.MAX_LENGTH_NAME_USER,
+        min: ConstantValue.MIN_LENGTH_NAME_USER,
+        pattern: ConstantValue.PATTERN_NAME_USER,
+        uppercase: true
+    };
 }

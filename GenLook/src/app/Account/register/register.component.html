@@ -3,7 +3,9 @@
   <div><input [(ngModel)]="name" type="text" placeholder="your account"></div>
   <div><input [(ngModel)]="password" type="password" placeholder="password"></div>
   <div><input [(ngModel)]="confirmPassword" type="password" placeholder="confirm password"></div>
+  <div><input type="text" placeholder="first name" [(ngModel)]="firstName"></div>
+  <div><input type="text" placeholder="last name" [(ngModel)]="lastName"></div>
   <div class="btn-signin" (click)="checkValidate()"><button>Create Account</button></div>
   <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active" >Back to sign in</div>
-
+  <div>{{statusMessage}}</div>
 </div>

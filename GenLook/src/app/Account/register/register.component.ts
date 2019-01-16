@@ -14,6 +14,9 @@ export class RegisterComponent implements OnInit {
   name = '';
   password = '';
   confirmPassword = '';
+  firstName = '';
+  lastName = '';
+  statusMessage = '';
   constructor() { }
 
   ngOnInit() {
@@ -22,14 +25,20 @@ export class RegisterComponent implements OnInit {
   checkValidate() {
     const isValidAccount = this.validateCommon.checkValidate(this.name , PatternCommon.AccountPattern);
     const isValidPassword = this.validateCommon.checkValidate(this.password , PatternCommon.PasswordPattern);
-    if (isValidAccount === ValidateCommon.VALID_TRUE && isValidPassword === ValidateCommon.VALID_TRUE) {
+    const isValidFirstName = this.validateCommon.checkValidate(this.firstName , PatternCommon.NamePattern);
+    const isValidLastName = this.validateCommon.checkValidate(this.lastName, PatternCommon.NamePattern);
+
+    if (isValidAccount === ValidateCommon.VALID_TRUE &&
+      isValidPassword === ValidateCommon.VALID_TRUE &&
+      isValidFirstName === ValidateCommon.VALID_TRUE &&
+      isValidLastName === ValidateCommon.VALID_TRUE) {
       if (this.password === this.confirmPassword) {
-        console.log('success');
+        this.statusMessage = 'success';
       } else {
-        console.log(ConstantValue.PASSWORD_IS_NOT_SAME);
+        this.statusMessage = ConstantValue.PASSWORD_IS_NOT_SAME;
       }
     } else {
-      console.log('fail');
+      this.statusMessage = 'invalid error';
     }
   }
 }
