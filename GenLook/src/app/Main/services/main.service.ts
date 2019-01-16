@@ -49,21 +49,21 @@ export class MainService {
   }
 
   getServices() {
-    return this.httpClient.get('http://localhost:3000/api/v1/genlook/genServices')
+    return this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_ALL_GENSERVICES)
     .subscribe((response: ResponseReturn) => {
       this._services.next(response.data);
     });
   }
 
   getYearEvent() {
-    return this.httpClient.get('http://localhost:3000/api/v1/genlook/yearEven')
+    return this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_ALL_YEAR_EVEN)
     .subscribe((response: any) => {
       this._yearEvent.next(response.data);
     });
   }
 
   getAddress() {
-    return this.httpClient.get('http://localhost:3000/api/v1/genlook/office')
+    return this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_ALL_OFFICE)
     .subscribe((response: any) => {
       this._address.next(response.data);
     });
