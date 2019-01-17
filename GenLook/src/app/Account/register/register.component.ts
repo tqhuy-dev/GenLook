@@ -38,11 +38,11 @@ export class RegisterComponent implements OnInit {
     const isValidPassword = this.validateCommon.checkValidate(this.password, PatternCommon.PasswordPattern);
     const isValidFirstName = this.validateCommon.checkValidate(this.firstName, PatternCommon.NamePattern);
     const isValidLastName = this.validateCommon.checkValidate(this.lastName, PatternCommon.NamePattern);
-
     if (isValidAccount === ValidateCommon.VALID_TRUE &&
       isValidPassword === ValidateCommon.VALID_TRUE &&
       isValidFirstName === ValidateCommon.VALID_TRUE &&
-      isValidLastName === ValidateCommon.VALID_TRUE) {
+      isValidLastName === ValidateCommon.VALID_TRUE &&
+      this.birthDay !== '') {
       if (this.password === this.confirmPassword) {
         this.statusMessage = 'success';
         const body = {
@@ -52,14 +52,16 @@ export class RegisterComponent implements OnInit {
           lastName: this.lastName,
           birthday: this.birthDay
         };
-        this.accountService.signin(body, function (message) {
+
+        this.accountService.signin(body, (message) => {
           this.statusMessage = message;
         });
       } else {
-        this.statusMessage = ConstantValue.PASSWORD_IS_NOT_SAME;
+        // this.statusMessage = ConstantValue.PASSWORD_IS_NOT_SAME;
+        alert(ConstantValue.PASSWORD_IS_NOT_SAME);
       }
     } else {
-      this.statusMessage = 'invalid error';
+      alert('error valid');
     }
   }
 

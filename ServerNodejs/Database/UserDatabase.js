@@ -30,10 +30,11 @@ class UserDatabase {
             password: req.body.password,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            birthday: Date.parse(req.body.birthday),
+            birthday: req.body.birthday,
             point: 0,
             level: 0,
-            friends: []
+            friends: [],
+            carts:[]
         })
 
         return new Promise((resolve, reject) => {

@@ -15,7 +15,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   selectDate(event: any) {
-    const dateString = event.month + '/' + event.day + '/' + event.year;
+    const dateString = event.month + '-' + event.day + '-' + event.year;
     this.componentServices.selectDateData(dateString);
   }
 

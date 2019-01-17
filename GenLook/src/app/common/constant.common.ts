@@ -2,7 +2,7 @@ export class ConstantValue {
     static readonly LOGIN_FAIL_MESSAGE = 'Login Fail';
     static readonly PASSWORD_IS_NOT_SAME = 'Password is not same';
 
-    static readonly PATTERN_NAME_USER = '[a-zA-Z]*';
+    static readonly PATTERN_NAME_USER = '[a-zA-Z ]*';
     static readonly MAX_LENGTH_NAME_USER = 30;
     static readonly MIN_LENGTH_NAME_USER = 1;
 
