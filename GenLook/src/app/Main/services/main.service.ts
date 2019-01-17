@@ -41,10 +41,6 @@ export class MainService {
       + ConstantValue.API_ACCESS_KEY_DEV)
       .subscribe((data: ResponseReturn) => {
         this._cities.next(data.data);
-      }, (error) => {
-
-      } , () => {
-        this._cities.complete();
       });
   }
 

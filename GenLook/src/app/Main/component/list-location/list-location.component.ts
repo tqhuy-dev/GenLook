@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/Main/services/main.service';
 import { City } from 'src/app/interface/city.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-location',
@@ -10,7 +11,8 @@ import { City } from 'src/app/interface/city.interface';
 export class ListLocationComponent implements OnInit {
 
   cities: City[] = [];
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService,
+    private router: Router) {}
 
   ngOnInit() {
     this.mainService.listCity.subscribe((data) => {
@@ -34,5 +36,10 @@ export class ListLocationComponent implements OnInit {
       console.log('completed');
     });
     this.mainService.getLocation();
+  }
+
+  seeDetailCity(city: City) {
+    console.log(city.name);
+    this.router.navigate(['/home/' + city.name]);
   }
 }

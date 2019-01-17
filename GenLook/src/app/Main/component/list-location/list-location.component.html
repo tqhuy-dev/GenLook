@@ -1,6 +1,6 @@
 <div class="flex-container">
   <div class="header">POPULAR DESTINATION</div>
   <div class="body">
-    <app-location  *ngFor="let item of cities" [city]="item"></app-location>
+    <app-location  *ngFor="let item of cities" [city]="item" (click)="seeDetailCity(item)"></app-location>
   </div>
 </div>
