@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   firstName = '';
   lastName = '';
   statusMessage = '';
+  birthDay = '';
+  isShowDatePicker = false;
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
           password: this.password,
           firstName: this.firstName,
           lastName: this.lastName,
-          birthday: '15/09/1996'
+          birthday: this.birthDay
         };
         this.accountService.signin(body , function(message) {
           this.statusMessage = message;
@@ -54,6 +56,10 @@ export class RegisterComponent implements OnInit {
   }
 
   selectBirthday(event: any) {
-    console.log(event);
+    this.birthDay = event.month + '/' + event.day + '/' + event.year;
+  }
+
+  showDatePicker() {
+    this.isShowDatePicker = !this.isShowDatePicker;
   }
 }

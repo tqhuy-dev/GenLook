@@ -12,12 +12,9 @@ export class AppComponent implements OnInit {
 
   constructor(private route: Router , @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
   ngOnInit() {
-    console.log(this.storage.get('uuid'));
     if (this.storage.get('uuid') !== null) {
-      console.log('uuid exist');
       this.route.navigate(['/home']);
     } else {
-      console.log('uuid');
       this.route.navigate(['/login']);
     }
   }

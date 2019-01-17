@@ -8,5 +8,10 @@
   <div class="btn-signin" (click)="checkValidate()"><button>Create Account</button></div>
   <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active" >Back to sign in</div>
   <div>{{statusMessage}}</div>
+  <div class="form-group">
+    <input type="text" placeholder="birthday" class="form-control" [(ngModel)]="birthDay" (click)="showDatePicker()">
+    <ngb-datepicker [minDate]="{year: 1990, month: 1, day: 1}" [maxDate]="{year:2019,month: 1 , day: 1}" 
+    *ngIf="isShowDatePicker" (select)="selectBirthday($event)"></ngb-datepicker>
+  </div>
 </div>
-<ngb-datepicker (select)="selectBirthday($event)"></ngb-datepicker>
+
