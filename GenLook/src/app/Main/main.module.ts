@@ -12,6 +12,8 @@ import { ServicesListComponent } from '../Main/component/services-list/services-
 import { YearEventItemComponent } from '../Main/component/year-event-item/year-event-item.component';
 import { AddressComponent } from '../Main/component/address/address.component';
 import { ListAddressComponent } from '../Main/component/list-address/list-address.component';
+import { HomePaigeComponent } from '../Main/component/home-paige/home-paige.component';
+import { AppRoutingModule } from '../app-routing.module';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -23,9 +25,11 @@ import { ListAddressComponent } from '../Main/component/list-address/list-addres
         ServicesListComponent,
         YearEventItemComponent,
         AddressComponent,
-        ListAddressComponent],
+        ListAddressComponent,
+        HomePaigeComponent],
     imports: [
         CommonModule,
+        AppRoutingModule,
         HttpClientModule],
     exports: [MainComponent],
     providers: [MainService],
