@@ -3,6 +3,7 @@ import { ValidateCommon } from 'src/app/common/validate.common';
 import { PatternCommon } from 'src/app/common/pattern.common';
 import { ConstantValue } from 'src/app/common/constant.common';
 import { AccountService } from '../account.service';
+import { ComponentServices } from 'src/app/component/component-services.service';
 
 @Component({
   selector: 'app-register',
@@ -20,15 +21,22 @@ export class RegisterComponent implements OnInit {
   statusMessage = '';
   birthDay = '';
   isShowDatePicker = false;
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService,
+    private componentServices: ComponentServices) {
+      this.componentServices.change.subscribe((data) => {
+        this.birthDay = data;
+      });
+  }
 
   ngOnInit() {
+
   }
 
   checkValidate() {
-    const isValidAccount = this.validateCommon.checkValidate(this.account , PatternCommon.AccountPattern);
-    const isValidPassword = this.validateCommon.checkValidate(this.password , PatternCommon.PasswordPattern);
-    const isValidFirstName = this.validateCommon.checkValidate(this.firstName , PatternCommon.NamePattern);
+    const isValidAccount = this.validateCommon.checkValidate(this.account, PatternCommon.AccountPattern);
+    const isValidPassword = this.validateCommon.checkValidate(this.password, PatternCommon.PasswordPattern);
+    const isValidFirstName = this.validateCommon.checkValidate(this.firstName, PatternCommon.NamePattern);
     const isValidLastName = this.validateCommon.checkValidate(this.lastName, PatternCommon.NamePattern);
 
     if (isValidAccount === ValidateCommon.VALID_TRUE &&
@@ -44,7 +52,7 @@ export class RegisterComponent implements OnInit {
           lastName: this.lastName,
           birthday: this.birthDay
         };
-        this.accountService.signin(body , function(message) {
+        this.accountService.signin(body, function (message) {
           this.statusMessage = message;
         });
       } else {

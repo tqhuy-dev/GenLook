@@ -1,0 +1,11 @@
+<form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd">
+      <ngb-datepicker (select)="selectDate($event)" *ngIf="isToggle" ></ngb-datepicker>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+</form>
