@@ -13,12 +13,21 @@ export class ListLocationComponent implements OnInit {
   constructor(private mainService: MainService) {}
 
   ngOnInit() {
-    this.getCities2();
-  }
-
-  getCities2() {
     this.mainService.listCity.subscribe((data) => {
       this.cities = data;
+      console.log(this.cities);
+    } , (error) => {
+      console.log('error');
+    } , () => {
+      console.log('completed');
+    });
+    this.mainService.getLocation();
+  }
+
+  getCities() {
+    this.mainService.listCity.subscribe((data) => {
+      this.cities = data;
+      console.log(this.cities);
     } , (error) => {
       console.log('error');
     } , () => {

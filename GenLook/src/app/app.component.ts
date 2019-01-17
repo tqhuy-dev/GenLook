@@ -10,12 +10,8 @@ import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 export class AppComponent implements OnInit {
   title = 'GenLook';
 
-  constructor(private route: Router , @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
+  constructor(private route: Router , @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+  }
   ngOnInit() {
-    if (this.storage.get('uuid') !== null) {
-      this.route.navigate(['/home']);
-    } else {
-      this.route.navigate(['/login']);
-    }
   }
 }

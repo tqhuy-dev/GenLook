@@ -12,13 +12,21 @@ export class ServicesListComponent implements OnInit {
 
   listServices: GenServices[] = [];
   listYearEvent: YearEvent[] = [];
-  @Input() mode: 0; // 0 : services , 1 : event
+  @Input() mode = 0; // 0 : services , 1 : event
   constructor(private mainServices: MainService) {
    }
 
   ngOnInit() {
-    this.getService();
-    this.getYearEvent();
+    console.log(this.mode);
+    switch (this.mode) {
+      case 0 : {
+        this.getService();
+      }break;
+
+      case 1 : {
+        this.getYearEvent();
+      }break;
+    }
   }
 
   getService() {

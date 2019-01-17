@@ -14,6 +14,7 @@ import { AddressComponent } from '../Main/component/address/address.component';
 import { ListAddressComponent } from '../Main/component/list-address/list-address.component';
 import { HomePaigeComponent } from '../Main/component/home-paige/home-paige.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { DetailPaigeComponent } from '../Main/component/detail-paige/detail-paige.component';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -26,7 +27,8 @@ import { AppRoutingModule } from '../app-routing.module';
         YearEventItemComponent,
         AddressComponent,
         ListAddressComponent,
-        HomePaigeComponent],
+        HomePaigeComponent,
+        DetailPaigeComponent],
     imports: [
         CommonModule,
         AppRoutingModule,

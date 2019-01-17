@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ValidateCommon } from '../../common/validate.common';
 import { PatternCommon } from '../../common/pattern.common';
 import { AccountService } from '../account.service';
 import { ConstantValue } from 'src/app/common/constant.common';
 import { Router } from '@angular/router';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,10 +16,18 @@ export class LoginComponent implements OnInit {
   account = '';
   password = '';
   statusMessage = '';
-  constructor(private accountServices: AccountService , private router: Router) {
+  constructor(
+    private accountServices: AccountService,
+    private router: Router,
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
   }
 
   ngOnInit() {
+    if (this.storage.get('uuid') !== null) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   checkValidAccount() {
