@@ -16,6 +16,7 @@ import { HomePaigeComponent } from '../Main/component/home-paige/home-paige.comp
 import { AppRoutingModule } from '../app-routing.module';
 import { DetailPaigeComponent } from '../Main/component/detail-paige/detail-paige.component';
 import { ActivitiesComponent } from '../component/activities/activities.component';
+import { ListActivitiesComponent } from '../component/list-activities/list-activities.component';
 @NgModule({
     declarations: [
         ToolBarComponent,
@@ -29,6 +30,8 @@ import { ActivitiesComponent } from '../component/activities/activities.componen
         AddressComponent,
         ListAddressComponent,
         HomePaigeComponent,
+        ListActivitiesComponent,
+        ActivitiesComponent,
         ActivitiesComponent,
         DetailPaigeComponent],
     imports: [

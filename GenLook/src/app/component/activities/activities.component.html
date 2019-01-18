@@ -4,17 +4,17 @@
   <div class="col-sm-8">
     <div class="col">
       <div class="row">
-        <div class="col-sm-3">Garden By The Bay</div>
-        <div class="col-sm-3">Available</div>
-        <div class="col-sm-3">4.5</div>
-        <div class="col-sm-3">10$</div>
+        <div class="col-sm-3 title">{{activities.name}}</div>
+        <div class="col-sm-3 status">{{activities.status}}</div>
+        <div class="col-sm-3 point">{{activities.rateStart}}</div>
+        <div class="col-sm-3 price">{{activities.salePrice}}</div>
       </div>
       <hr>
       <div class="row">
-        <div class="col-sm">des</div>
+        <div class="col-sm">{{activities.description}}</div>
       </div>
       <div class="row">
-        <div class="col-sm"><button class="btn btn-primary">cart</button></div>
+        <div class="col-sm"><button class="btn btn-primary">add to cart</button></div>
       </div>
     </div>
   </div>
