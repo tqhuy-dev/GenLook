@@ -17,15 +17,28 @@ export class ActivitiesService {
   constructor(private httpClient: HttpClient) { }
 
   getDataActivities(nameCity: String) {
-    this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_CITY_DETAIL + nameCity + ConstantValue.API_ACCESS_KEY_DEV)
+    this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_CITY_DETAIL + nameCity + '/' + ConstantValue.API_ACCESS_KEY_DEV)
     .subscribe((response: ResponseReturn) => {
       const data = response.data.activities.map((element) => {
-        // let activitiesItem: Activities = {
-        //   _id: element._id,
-        //   name: element.name,
-        //   main
-        // };
+        const activitiesItem: Activities = {
+          _id: element._id,
+          name: element.name,
+          mainPrice: element.mainPrice,
+          salePrice: element.salePrice,
+          status: element.status,
+          rateStart: element.rateStart,
+          city: element.city,
+          time: {
+            open: element.time.open,
+            close: element.time.close
+          },
+          booking: element.booking,
+          description: element.description,
+          image: element.image
+        };
+        return activitiesItem;
       });
+      this._activities.next(data);
     });
   }
 }
