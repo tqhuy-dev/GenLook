@@ -39,4 +39,12 @@ router.post('/password' , (req , res , next) =>{
     })
 })
 
+router.put('/cart' , (req , res , next) =>{
+    userDatabase.addActivitiesIntoCart(req.body.activity , req.body.uuid).then((data) =>{
+        res.status(data.statusCode).json(data);
+    }).catch((error) =>{
+        res.status(error.statusCode).json(error);
+    })
+})
+
 module.exports = router;

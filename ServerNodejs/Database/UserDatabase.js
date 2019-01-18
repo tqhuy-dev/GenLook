@@ -4,6 +4,7 @@ const common = require('../Shared/Common');
 const constant = require('../Shared/Constant');
 const Promise = require('bluebird');
 const uuid = require('uuid/v4');
+const UuidDatabase = require('../Database/UuidDatabase');
 
 class UserDatabase {
 
@@ -34,7 +35,7 @@ class UserDatabase {
             point: 0,
             level: 0,
             friends: [],
-            carts:[]
+            carts: []
         })
 
         return new Promise((resolve, reject) => {
@@ -70,11 +71,11 @@ class UserDatabase {
             }, {
                 password: req.body.newPass
             }, function (error, result) {
-                if(error) {
-                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+                if (error) {
+                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                 } else {
-                    if(result !== null){
-                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Query Success" , result));
+                    if (result !== null) {
+                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", result));
                     } else {
                         reject(constant.ERROR_MESSAGE_DATA_NOT_FOUND);
                     }
@@ -103,6 +104,31 @@ class UserDatabase {
                 }
             })
         });
+    }
+
+    async addActivitiesIntoCart(idActivites, uuid) {
+        var uuidDatabase = new UuidDatabase();
+        var result;
+        try {
+            var result = await uuidDatabase.getAccountFromUuid(uuid);
+            return new Promise((resolve, reject) => {
+                User.findOneAndUpdate({
+                    account: result.data.account
+                }, {
+                    $push: {
+                        carts: idActivites
+                    }
+                }, function (error, result) {
+                    if (error) {
+                        reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
+                    } else {
+                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", result));
+                    }
+                })
+            })
+        } catch (errorUUID) {
+            return new Promise.reject(errorUUID);
+        }
     }
 }
 

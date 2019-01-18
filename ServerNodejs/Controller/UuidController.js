@@ -6,7 +6,7 @@ var uuidDatabase = new UuidDatabase();
 router.get('/account/:uuid' , (req , res , next) =>{
     var uuid = req.params.uuid;
     uuidDatabase.getAccountFromUuid(uuid).then((result) =>{
-        res.status(result.statusCode).json(result.data.account);
+        res.status(result.statusCode).json(result);
     }).catch((error) =>{
         res.status(error.statusCode).json(error);
     })
