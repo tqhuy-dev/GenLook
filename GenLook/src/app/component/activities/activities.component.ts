@@ -29,4 +29,6 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {
   }
 
+  addToCart() {
+  }
 }

@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.storage.get('uuid') !== null) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['login']);
     }
   }
 
