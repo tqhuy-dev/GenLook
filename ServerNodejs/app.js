@@ -10,6 +10,7 @@ const activitiesController = require('./Controller/ActivitiesController');
 const yearEvenController = require('./Controller/YearEvenController');
 const officeAddressController = require('./Controller/OfficeAddressController');
 const userController = require('./Controller/UserController');
+const uuidController = require('./Controller/UuidController');
 const cors = require('cors');
 const constant = require('./Shared/Constant');
 //connect mLab Database
@@ -56,6 +57,7 @@ app.use('/api/v1/genlook/activities' , activitiesController);
 app.use('/api/v1/genlook/yearEven' , yearEvenController);
 app.use('/api/v1/genlook/office' , officeAddressController);
 app.use('/api/v1/genlook/user' , userController);
+app.use('api/v1/genlook/uuid' , uuidController);
 // initialize handle error
 app.use((req , res , next) => {
     next(constant.ERROR_MESSAGE_404)
