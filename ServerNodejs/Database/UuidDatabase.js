@@ -16,11 +16,7 @@ class UuidTable {
                 if (error) {
                     reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
                 } else {
-                    if(result !== null) {
-                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Query Success" , result));
-                    } else {
-                        reject(constant.ERROR_MESSAGE_DATA_NOT_FOUND);
-                    }
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Query Success" , result));
                 }
             })
         })

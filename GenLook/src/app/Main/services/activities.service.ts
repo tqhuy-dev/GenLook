@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Activities } from 'src/app/interface/activities.interface';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ConstantValue } from 'src/app/common/constant.common';
 import { ApiLink } from 'src/app/common/api-constant.common';
 import { ResponseReturn } from 'src/app/interface/response.interface';
+import { WebStorageService, LOCAL_STORAGE } from 'angular-webstorage-service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,13 @@ export class ActivitiesService {
   get activities() {
     return this._activities.asObservable();
   }
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    @Inject(LOCAL_STORAGE) private webStorage: WebStorageService) { }
 
   getDataActivities(nameCity: String) {
-    this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_CITY_DETAIL + nameCity + '/' + ConstantValue.API_ACCESS_KEY_DEV)
+    console.log('================', this.webStorage.get('uuid'));
+    this.httpClient.get(ConstantValue.BASE_URL_API + ApiLink.API_GET_CITY_DETAIL + nameCity + '/' + this.webStorage.get('uuid'))
     .subscribe((response: ResponseReturn) => {
       const data = response.data.activities.map((element) => {
         const activitiesItem: Activities = {

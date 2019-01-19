@@ -33,9 +33,9 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/:name/', (req, res, next) => {
+router.get('/:name/:uuid', (req, res, next) => {
     var name = req.params.name;
-    var uuid = req.body.uuid;
+    var uuid = req.params.uuid;
 
     if (name.length < 15) {
         cityDatabase.getCityByName(name , uuid).then((data) => {
