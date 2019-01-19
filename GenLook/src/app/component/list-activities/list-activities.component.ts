@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Activities } from 'src/app/interface/activities.interface';
 import { ActivitiesService } from 'src/app/Main/services/activities.service';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-list-activities',
@@ -11,7 +12,9 @@ export class ListActivitiesComponent implements OnInit {
 
   @Input() City: String = '';
   activities: Activities[] = [];
-  constructor(private activitiesService: ActivitiesService ) { }
+  constructor(
+    private activitiesService: ActivitiesService,
+    @Inject(LOCAL_STORAGE) private webStorage: WebStorageService ) { }
 
   ngOnInit() {
     this.activitiesService.activities.subscribe((data) => {
@@ -20,4 +23,14 @@ export class ListActivitiesComponent implements OnInit {
     this.activitiesService.getDataActivities(this.City);
   }
 
+  addToCart(activity: Activities) {
+    this.activitiesService.addActivitiesIntoCart(activity._id , this.webStorage.get('uuid') ,
+    (result) => {
+      if (true) {
+        activity.status += ' On Cart';
+      } else {
+        alert('false');
+      }
+    });
+  }
 }

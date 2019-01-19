@@ -1,5 +1,7 @@
-import { Component, OnInit , Input } from '@angular/core';
+import { Component, OnInit , Input, Inject, LOCALE_ID } from '@angular/core';
 import { Activities } from 'src/app/interface/activities.interface';
+import { ActivitiesService } from 'src/app/Main/services/activities.service';
+import { WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-activities',
@@ -24,11 +26,10 @@ export class ActivitiesComponent implements OnInit {
     description: '',
     image: ''
   };
-  constructor() { }
+  constructor(
+    private activitiesService: ActivitiesService,
+    @Inject(LOCALE_ID) private webStorage: WebStorageService) { }
 
   ngOnInit() {
-  }
-
-  addToCart() {
   }
 }
