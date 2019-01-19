@@ -111,24 +111,60 @@ class UserDatabase {
         var result;
         try {
             var result = await uuidDatabase.getAccountFromUuid(uuid);
-            return new Promise((resolve, reject) => {
-                User.findOneAndUpdate({
-                    account: result.data.account
-                }, {
-                    $push: {
-                        carts: idActivites
-                    }
-                }, function (error, result) {
-                    if (error) {
-                        reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
-                    } else {
-                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", result));
-                    }
+            var isExist = await this.checkExistenceActivities(idActivites, result.data.account);
+            if (isExist) {
+                return new Promise.reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, "isExist", []))
+            } else {
+                return new Promise((resolve, reject) => {
+                    User.findOneAndUpdate({
+                        account: result.data.account
+                    }, {
+                        $push: {
+                            carts: idActivites
+                        }
+                    }, function (error, result) {
+                        if (error) {
+                            reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
+                        } else {
+                            resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", result));
+                        }
+                    })
                 })
-            })
+            }
         } catch (errorUUID) {
             return new Promise.reject(errorUUID);
         }
+    }
+
+    checkExistenceActivities(idActivites, account) {
+        return new Promise((resolve, reject) => {
+            User.findOne({
+                account: account
+            },  (error, result) => {
+                if (error) {
+                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+                } else {
+                    if (result !== null) {
+                        resolve(this.isExistenceActivities(idActivites, result.carts))
+                    }
+                }
+            })
+        })
+    }
+
+    isExistenceActivities(idActivites, activities) {
+        if(activities.length === 0) {
+            return false;
+        }
+        var isExistent = false;
+        console.log(idActivites , activities);
+        for(var element = 0;element < activities.length ; element++){
+            if (idActivites === activities[element]) {
+                isExistent = true;
+                break;
+            }
+        }
+        return isExistent;
     }
 }
 
