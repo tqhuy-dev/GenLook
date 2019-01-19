@@ -70,7 +70,7 @@ class CityDatabase {
                                     activities: data
                                 }));
                             }).catch((error) => {
-                                activities = error;
+                               reject(error);
                             })
                         } else {
                             reject(constant.ERROR_MESSAGE_DATA_NOT_FOUND);
@@ -103,7 +103,6 @@ class CityDatabase {
                                     break;
                                 }
                             }
-                            console.log(result[i]);
                         }
                         resolve(result);
                     }
