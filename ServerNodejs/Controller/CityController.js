@@ -33,20 +33,16 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/:name/:api_access_key_dev', (req, res, next) => {
+router.get('/:name/', (req, res, next) => {
     var name = req.params.name;
-    var api_access_key_dev = req.params.api_access_key_dev;
+    var uuid = req.body.uuid;
 
-    if (api_access_key_dev === constant.API_ACCESS_KEY_DEV) {
-        if (name.length < 15) {
-            cityDatabase.getCityByName(name).then((data) => {
-                res.status(200).json(data);
-            }).catch((error) => {
-                res.status(error.statusCode).json(error);
-            });
-        }
-    } else {
-        res.status(401).json(constant.ERROR_MESSAGE_UNAUTHORIZED)
+    if (name.length < 15) {
+        cityDatabase.getCityByName(name , uuid).then((data) => {
+            res.status(200).json(data);
+        }).catch((error) => {
+            res.status(error.statusCode).json(error);
+        });
     }
 
 });

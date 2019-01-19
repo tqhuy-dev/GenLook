@@ -166,6 +166,18 @@ class UserDatabase {
         }
         return isExistent;
     }
+
+    getAllActivitiesAccount(account){
+        return new Promise((resolve , reject) =>{
+            User.findOne({account:account} , function(error , result){
+                if(error){
+                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+                } else {
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Query success" , result.carts));
+                }
+            })
+        })
+    }
 }
 
 module.exports = UserDatabase;
