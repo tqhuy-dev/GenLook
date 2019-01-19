@@ -40,6 +40,6 @@ export class ListLocationComponent implements OnInit {
 
   seeDetailCity(city: City) {
     console.log(city.name);
-    this.router.navigate(['/home/' + city.name]);
+    this.router.navigate(['/home/city/' + city.name]);
   }
 }

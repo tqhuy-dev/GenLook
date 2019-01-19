@@ -11,12 +11,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerComponent } from './component/date-picker/date-picker.component';
+import { UserInformationComponent } from './UserInformation/user-information/user-information.component';
+import { CartComponent } from './UserInformation/cart/cart.component';
+import { InformationComponent } from './UserInformation/information/information.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     DatePickerComponent,
+    UserInformationComponent,
+    CartComponent,
+    InformationComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,9 @@ import { RegisterComponent } from './Account/register/register.component';
 import { MainComponent } from './Main/component/main/main.component';
 import { HomePaigeComponent } from './Main/component/home-paige/home-paige.component';
 import { DetailPaigeComponent } from './Main/component/detail-paige/detail-paige.component';
+import { UserInformationComponent } from './UserInformation/user-information/user-information.component';
+import { CartComponent } from './UserInformation/cart/cart.component';
+import { InformationComponent } from './UserInformation/information/information.component';
 
 const routes: Routes = [
   {
@@ -28,11 +31,30 @@ const routes: Routes = [
       component: HomePaigeComponent
     },
     {
-      path: ':city',
+      path: 'city/:city',
       component: DetailPaigeComponent
+    },
+    {
+      path: 'user',
+      component: UserInformationComponent,
+      children: [
+        {
+          path: '',
+          redirectTo: 'cart',
+          pathMatch: 'full'
+        },
+        {
+          path: 'cart',
+          component: CartComponent
+        },
+        {
+          path: 'information',
+          component: InformationComponent
+        }
+      ]
     }
   ]
-  }
+  },
 ];
 
 @NgModule({
