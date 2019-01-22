@@ -8,6 +8,8 @@ import { DetailPaigeComponent } from './Main/component/detail-paige/detail-paige
 import { UserInformationComponent } from './UserInformation/user-information/user-information.component';
 import { CartComponent } from './UserInformation/cart/cart.component';
 import { InformationComponent } from './UserInformation/information/information.component';
+import { AuthGuard } from './guard/auth-guard.services';
+import { HomePaigeGuard } from './guard/home-guard.services';
 
 const routes: Routes = [
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    canActivate: [AuthGuard],
     path: 'login',
     component: LoginComponent,
   },
@@ -24,6 +27,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    canActivate: [HomePaigeGuard],
     path: 'home',
     component: MainComponent,
     children: [{

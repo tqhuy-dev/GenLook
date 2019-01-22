@@ -1,8 +1,12 @@
 <div class="flex-container">
-  <div class="header">GenLook</div>
-  <div><input [(ngModel)]="account" type="text" placeholder="your account"></div>
-  <div><input [(ngModel)]="password" type="password" placeholder="password"></div>
-  <div class="btn-signin"><button (click)="loginServer()">Sign In</button></div>
-  <div class="create-account" [routerLink]="['/signin']" routerLinkActive="router-link-active" >Create An Account</div>
+  <div class="header form-group">GenLook</div>
+  <form action="" [formGroup]="loginForm">
+    <div><input type="text" placeholder="your account" class="form-control" formControlName="username"></div>
+    <div [hidden]="!account.invalid">username is invalid</div>
+    <div><input type="password" placeholder="password" class="form-control" formControlName="password"></div>
+    <div [hidden]="!password.invalid">password is invalid</div>
+    <div class="btn-signin"><button class="btn btn-primary" (click)="loginServer()" [disabled]="loginForm.invalid">Sign In</button></div>
+  </form>
+  <div class="create-account" [routerLink]="['/signin']" routerLinkActive="router-link-active">Create An Account</div>
   <div>{{statusMessage}}</div>
 </div>

@@ -5,6 +5,7 @@ import { AccountService } from '../account.service';
 import { ConstantValue } from 'src/app/common/constant.common';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,13 +14,31 @@ import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 export class LoginComponent implements OnInit {
 
   validateCommon = new ValidateCommon();
-  account = '';
-  password = '';
+
+  account = new FormControl('', [
+    Validators.minLength(ConstantValue.MIN_LENGTH_ACCOUNT),
+    Validators.maxLength(ConstantValue.MAX_LENGTH_ACCOUNT),
+    Validators.pattern(ConstantValue.PATTERN_ACCOUNT),
+    Validators.required]);
+  password = new FormControl('', [
+    Validators.minLength(ConstantValue.MIN_LENGTH_PASSWORD),
+    Validators.maxLength(ConstantValue.MAX_LENGTH_PASSWORD),
+    Validators.pattern(ConstantValue.PATTERN_PASSWORD),
+    Validators.required
+  ]);
+
   statusMessage = '';
+
+  loginForm = this.formBuider.group({
+    username: this.account,
+    password: this.password
+  });
+  // loginForm:
   constructor(
     private accountServices: AccountService,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService) {
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    private formBuider: FormBuilder) {
   }
 
   ngOnInit() {
@@ -30,19 +49,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  checkValidAccount() {
-    const isValidAccount = this.validateCommon.checkValidate(this.account, PatternCommon.AccountPattern);
-    const isValidPassword = this.validateCommon.checkValidate(this.password, PatternCommon.PasswordPattern);
-    if (isValidAccount === ValidateCommon.VALID_TRUE && isValidPassword === ValidateCommon.VALID_TRUE) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   loginServer() {
-    if (this.checkValidAccount()) {
-      this.accountServices.login(this.account, this.password).then((data) => {
+    if (this.loginForm.valid) {
+      this.accountServices.login(this.loginForm.value.username, this.loginForm.value.password).then((data) => {
         this.statusMessage = 'success';
         this.router.navigate(['/home']);
 
@@ -54,6 +63,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  checkValidPassword(password: String) {
+  checkValid() {
+    console.log(this.loginForm.valid);
   }
+
 }

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MainModule } from './Main/main.module';
 import { LoginComponent } from './Account/login/login.component';
 import { RegisterComponent } from './Account/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +31,8 @@ import { InformationComponent } from './UserInformation/information/information.
     AppRoutingModule,
     HttpClientModule,
     StorageServiceModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
