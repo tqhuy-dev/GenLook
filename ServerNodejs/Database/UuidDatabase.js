@@ -21,6 +21,18 @@ class UuidTable {
             })
         })
     }
+
+    updateUUID(account , uuid){
+        return new Promise((resolve , reject) =>{
+            uuidModel.findOneAndUpdate({account: account} ,{ $set : {uuid: uuid} } , (error , result) =>{
+                if(error) {
+                    reject(error);
+                } else {
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Success" ,[]));
+                }
+            })
+        })
+    }
 }
 
 module.exports =UuidTable;

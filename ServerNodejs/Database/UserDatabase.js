@@ -53,7 +53,11 @@ class UserDatabase {
         return new Promise((resolve, reject) => {
             this.findAccount(req).then((data) => {
                 if (data) {
-                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, uuid(), []));
+                    var uuidDB = new UuidDatabase();
+                    var newUUID = uuid();
+                    uuidDB.updateUUID(req.body.account, newUUID).then((data) => {
+                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, newUUID, []));
+                    })
                 } else {
                     reject(constant.ERROR_MESSAGE_LOGIN_FAIL);
                 }
@@ -140,9 +144,9 @@ class UserDatabase {
         return new Promise((resolve, reject) => {
             User.findOne({
                 account: account
-            },  (error, result) => {
+            }, (error, result) => {
                 if (error) {
-                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                 } else {
                     if (result !== null) {
                         resolve(this.isExistenceActivities(idActivites, result.carts))
@@ -153,12 +157,12 @@ class UserDatabase {
     }
 
     isExistenceActivities(idActivites, activities) {
-        if(activities.length === 0) {
+        if (activities.length === 0) {
             return false;
         }
         var isExistent = false;
-        console.log(idActivites , activities);
-        for(var element = 0;element < activities.length ; element++){
+        console.log(idActivites, activities);
+        for (var element = 0; element < activities.length; element++) {
             if (idActivites === activities[element]) {
                 isExistent = true;
                 break;
@@ -167,13 +171,15 @@ class UserDatabase {
         return isExistent;
     }
 
-    getAllActivitiesAccount(account){
-        return new Promise((resolve , reject) =>{
-            User.findOne({account:account} , function(error , result){
-                if(error){
-                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+    getAllActivitiesAccount(account) {
+        return new Promise((resolve, reject) => {
+            User.findOne({
+                account: account
+            }, function (error, result) {
+                if (error) {
+                    reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                 } else {
-                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Query success" , result.carts));
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query success", result.carts));
                 }
             })
         })
