@@ -10,6 +10,7 @@ export class HomePaigeGuard implements CanActivate {
         if (uuid !== null) {
             return true;
         } else {
+            console.log(uuid);
             this.router.navigate(['/']);
             return false;
         }

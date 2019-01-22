@@ -44,7 +44,10 @@ export class AccountService {
     this.httpOptions.headers.set('Authorization' , `Basic ${encode}`);
     this.httpClient.put(ConstantValue.BASE_URL_API + ApiLink.API_SIGNIN, form, this.httpOptions)
       .subscribe((response: ResponseReturn) => {
-        callback(response.message);
+        if (response.statusCode === 200) {
+          this.storage.set('uuid' , response.message);
+        }
+        callback(response.statusCode);
       });
   }
 }

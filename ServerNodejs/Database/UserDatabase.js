@@ -43,7 +43,7 @@ class UserDatabase {
                 if (error) {
                     reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                 } else {
-                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "create success", result));
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, uuid(), []));
                 }
             })
         })

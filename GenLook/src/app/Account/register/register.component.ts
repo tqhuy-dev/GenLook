@@ -4,6 +4,9 @@ import { PatternCommon } from 'src/app/common/pattern.common';
 import { ConstantValue } from 'src/app/common/constant.common';
 import { AccountService } from '../account.service';
 import { ComponentServices } from 'src/app/component/component-services.service';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-register',
@@ -12,64 +15,48 @@ import { ComponentServices } from 'src/app/component/component-services.service'
 })
 export class RegisterComponent implements OnInit {
 
-  validateCommon = new ValidateCommon();
-  account = '';
-  password = '';
-  confirmPassword = '';
-  firstName = '';
-  lastName = '';
   statusMessage = '';
+  account = new FormControl('', PatternCommon.AccountPattern);
+  password = new FormControl('', PatternCommon.PasswordPattern);
+  confirmPassword = new FormControl('', PatternCommon.PasswordPattern);
+  firstName = new FormControl('', PatternCommon.NamePattern);
+  lastName = new FormControl('', PatternCommon.NamePattern);
   birthDay = '';
-  isShowDatePicker = false;
+  registerForm = this.formBuider.group({
+    account: this.account,
+    password: this.password,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    confirmPassword: this.confirmPassword
+  });
   constructor(
     private accountService: AccountService,
-    private componentServices: ComponentServices) {
-      this.componentServices.change.subscribe((data) => {
-        this.birthDay = data;
-      });
+    private componentServices: ComponentServices,
+    private formBuider: FormBuilder,
+    private router: Router) {
+    this.componentServices.change.subscribe((data) => {
+      this.birthDay = data;
+    });
   }
 
   ngOnInit() {
 
   }
 
-  checkValidate() {
-    const isValidAccount = this.validateCommon.checkValidate(this.account, PatternCommon.AccountPattern);
-    const isValidPassword = this.validateCommon.checkValidate(this.password, PatternCommon.PasswordPattern);
-    const isValidFirstName = this.validateCommon.checkValidate(this.firstName, PatternCommon.NamePattern);
-    const isValidLastName = this.validateCommon.checkValidate(this.lastName, PatternCommon.NamePattern);
-    if (isValidAccount === ValidateCommon.VALID_TRUE &&
-      isValidPassword === ValidateCommon.VALID_TRUE &&
-      isValidFirstName === ValidateCommon.VALID_TRUE &&
-      isValidLastName === ValidateCommon.VALID_TRUE &&
-      this.birthDay !== '') {
-      if (this.password === this.confirmPassword) {
-        this.statusMessage = 'success';
-        const body = {
-          account: this.account,
-          password: this.password,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          birthday: this.birthDay
-        };
-
-        this.accountService.signin(body, (message) => {
-          this.statusMessage = message;
-        });
-      } else {
-        // this.statusMessage = ConstantValue.PASSWORD_IS_NOT_SAME;
-        alert(ConstantValue.PASSWORD_IS_NOT_SAME);
-      }
-    } else {
-      alert('error valid');
+  register() {
+    const body = {
+      account: this.registerForm.value.account,
+      password: this.registerForm.value.password,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      birthday: this.birthDay
+    };
+    if (this.registerForm.valid) {
+      this.accountService.signin( body , (statusCode) => {
+        if ( statusCode === 200) {
+          this.router.navigate(['home']);
+        }
+      });
     }
-  }
-
-  selectBirthday(event: any) {
-    this.birthDay = event.month + '/' + event.day + '/' + event.year;
-  }
-
-  showDatePicker() {
-    this.isShowDatePicker = !this.isShowDatePicker;
   }
 }

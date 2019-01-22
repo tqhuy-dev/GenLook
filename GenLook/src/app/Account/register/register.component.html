@@ -1,14 +1,18 @@
 <div class="flex-container">
   <div class="header">GenLook</div>
-  <div><input [(ngModel)]="account" type="text" placeholder="your account"></div>
-  <div><input [(ngModel)]="password" type="password" placeholder="password"></div>
-  <div><input [(ngModel)]="confirmPassword" type="password" placeholder="confirm password"></div>
-  <div><input type="text" placeholder="first name" [(ngModel)]="firstName"></div>
-  <div><input type="text" placeholder="last name" [(ngModel)]="lastName"></div>
-  <div class="btn-signin" (click)="checkValidate()"><button>Create Account</button></div>
-  <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active" >Back to sign in</div>
-  <div>{{statusMessage}}</div>
+  <form action="" class="form-group" [formGroup]="registerForm">
+    <div><input class="form-control" type="text" placeholder="your account" formControlName="account"></div>
+    <div [hidden]="!account.invalid">account is invalid</div>
+    <div><input class="form-control" type="password" placeholder="password" formControlName="password"></div>
+    <div [hidden]="!password.invalid">password is invalid</div>
+    <div><input class="form-control" type="password" placeholder="confirm password" formControlName="confirmPassword"></div>
+    <div [hidden]="(this.registerForm.value.password === this.registerForm.value.confirmPassword || confirmPassword.untouched )" >password is not same</div>
+    <div><input class="form-control" type="text" placeholder="first name" formControlName="firstName"></div>
+    <div [hidden]="!firstName.invalid">firstname is invalid</div>
+    <div><input class="form-control" type="text" placeholder="last name"  formControlName="lastName"></div>
+    <div [hidden]="!lastName.invalid">lastname is invalid</div>
+    <div class="btn-signin" ><button class="btn btn-primary" [disabled]="registerForm.invalid" (click)="register()">Create Account</button></div>
+    <div class="create-account" [routerLink]="['/login']" routerLinkActive="router-link-active">Back to sign in</div>
+  </form>
   <app-date-picker></app-date-picker>
-  <div>{{birthDay}}</div>
 </div>
-
