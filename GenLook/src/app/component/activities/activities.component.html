@@ -14,7 +14,10 @@
         <div class="col-sm">{{activities.description}}</div>
       </div>
       <div class="row">
-        <div class="col-sm"><button class="btn btn-primary" (click)="addToCart()">add to cart</button></div>
+        <div class="col-sm-2" *ngIf="activities.status === outCart"><button class="btn btn-primary" (click)="addToCart()">add to cart</button></div>
+        <div class="col-sm-2" *ngIf="activities.status === outCart || activities.status === inCart"><button class="btn btn-primary" (click)="addToCart()">paying</button></div>
+        <div class="col-sm-2" *ngIf="activities.status === inCart"><button class="btn btn-primary" (click)="addToCart()">remove</button></div>
+        <div class="col-sm-2" *ngIf="activities.status === inPaying"><button class="btn btn-primary" (click)="addToCart()">cancel</button></div>
       </div>
     </div>
   </div>

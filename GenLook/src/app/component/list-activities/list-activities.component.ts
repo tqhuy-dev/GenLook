@@ -22,15 +22,4 @@ export class ListActivitiesComponent implements OnInit {
     });
     this.activitiesService.getDataActivities(this.City);
   }
-
-  addToCart(activity: Activities) {
-    this.activitiesService.addActivitiesIntoCart(activity._id , this.webStorage.get('uuid') ,
-    (result) => {
-      if (true) {
-        activity.status += ' On Cart';
-      } else {
-        alert('false');
-      }
-    });
-  }
 }
