@@ -116,6 +116,7 @@ class UserDatabase {
         var result;
         try {
             var result = await uuidDatabase.getAccountFromUuid(uuid);
+            console.log('=============',result)
             var isExist = await this.checkExistenceActivities(idActivites, result.data.account);
             if (isExist) {
                 return new Promise.reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, "isExist", []))
@@ -127,11 +128,11 @@ class UserDatabase {
                         $push: {
                             carts: idActivites
                         }
-                    }, function (error, result) {
+                    }, function (error, resultUser) {
                         if (error) {
                             reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                         } else {
-                            resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", result));
+                            resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query Success", resultUser));
                         }
                     })
                 })
