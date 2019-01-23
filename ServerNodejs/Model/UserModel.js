@@ -14,7 +14,12 @@ const UserSchema = mongoose.Schema({
         id: String,
     }],
     carts:[],
-    ticket:[]
+    ticket:[{
+        activity: String,
+        price: Number,
+        dayOpen: String,
+        dayClose: String
+    }]
 },{versionKey:false});
 
 module.exports = mongoose.model('UserTable' , UserSchema  , 'UserTable');

@@ -180,7 +180,7 @@ class UserDatabase {
                 if (error) {
                     reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL, error, []));
                 } else {
-                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query success", result.carts));
+                    resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS, "Query success", result));
                 }
             })
         })
