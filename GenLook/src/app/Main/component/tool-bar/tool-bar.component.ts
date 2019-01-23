@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WebStorageService } from 'angular-webstorage-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tool-bar',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router) { }
 
   ngOnInit() {
   }
 
+  signOut() {
+    localStorage.removeItem('uuid');
+    this.router.navigate(['/login']);
+  }
 }
