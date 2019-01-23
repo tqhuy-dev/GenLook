@@ -35,7 +35,8 @@ class UserDatabase {
             point: 0,
             level: 0,
             friends: [],
-            carts: []
+            carts: [],
+            ticket:[]
         })
 
         return new Promise((resolve, reject) => {

@@ -13,7 +13,8 @@ const UserSchema = mongoose.Schema({
         friendlyPoint:Number,
         id: String,
     }],
-    carts:[]
+    carts:[],
+    ticket:[]
 },{versionKey:false});
 
 module.exports = mongoose.model('UserTable' , UserSchema  , 'UserTable');
