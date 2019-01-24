@@ -142,6 +142,29 @@ class UserDatabase {
         }
     }
 
+    async removeActivityFromCart(idActivity ,uuid) {
+        var uuidDB = new UuidDatabase();
+        try{
+            let isAccount = await uuidDB.getAccountFromUuid(uuid);
+            return new Promise((resolve , reject) =>{
+                User.findOneAndUpdate({
+                    account: isAccount.data.account
+                } , {
+                    $pull:{
+                        carts:idActivity
+                }} , (error , result) =>{
+                    if(error){
+                        reject(common.getMessageAPI(constant.STATUS_CODE_QUERY_FAIL , error , []));
+                    } else {
+                        resolve(common.getMessageAPI(constant.STATUS_CODE_QUERY_SUCCESS , "Success" , result))
+                    }
+                })
+            })
+        }catch(e){
+            return new Promise.reject(e);
+        }
+    }
+
     checkExistenceActivities(idActivites, account) {
         return new Promise((resolve, reject) => {
             User.findOne({

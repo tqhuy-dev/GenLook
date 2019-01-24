@@ -104,14 +104,6 @@ class CityDatabase {
                                 }
                             }
                         }
-                        for(var i = 0 ; i < result.length ; i++){
-                            for(var j = 0; j < resultAcitivitiesAccount.data.ticket.length ; j++){
-                                if(result[i]._id == resultAcitivitiesAccount.data.ticket[j].activity){
-                                    result[i].status += ' On Paying';
-                                    break;
-                                }
-                            }
-                        }
                         resolve(result);
                     }
                 })
